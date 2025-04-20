@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-     "start": "node server.js"
+    "postinstall": "npx puppeteer install --chrome",  
+    "start": "PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable node server.js" 
   },
   "keywords": [],
   "author": "",
