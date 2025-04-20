@@ -2,9 +2,11 @@ const puppeteer = require("puppeteer");
 
 const scrapeData = async (divId) => {
   const browser = await puppeteer.launch({
-    executablePath: "/usr/bin/google-chrome-stable",  // This is the path used by Render
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],  // These arguments are often required on cloud platforms
-  })
+    // executablePath: "/usr/bin/google-chrome-stable",  // This is the path used by Render
+    // args: ["--no-sandbox", "--disable-setuid-sandbox"],  // These arguments are often required on cloud platforms
+    headless: true,
+  args: ["--no-sandbox", "--disable-setuid-sandbox"],
+})
   const page = await browser.newPage();
   await page.goto("https://www.iiitdmj.ac.in/", { waitUntil: "load" });
 
