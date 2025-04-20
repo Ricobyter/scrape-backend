@@ -2,11 +2,9 @@ const puppeteer = require("puppeteer");
 
 const scrapeData = async (divId) => {
   const browser = await puppeteer.launch({
-    // executablePath: "/usr/bin/google-chrome-stable",  // This is the path used by Render
-    // args: ["--no-sandbox", "--disable-setuid-sandbox"],  // These arguments are often required on cloud platforms
     headless: true,
-  args: ["--no-sandbox", "--disable-setuid-sandbox"],
-})
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
   const page = await browser.newPage();
   await page.goto("https://www.iiitdmj.ac.in/", { waitUntil: "load" });
 
@@ -17,18 +15,20 @@ const scrapeData = async (divId) => {
     const items = new Map();
     const divs = container.querySelectorAll("div");
 
-    divs.forEach(div => {
+    divs.forEach((div) => {
       const titleElement = div.querySelector("h3");
       const dateElement = div.querySelector("small");
       const linkElement = div.querySelector("a");
 
       if (titleElement && linkElement) {
-        const key = `${titleElement.innerText.trim()}|${dateElement?.innerText.trim() || ''}|${linkElement.href}`;
+        const key = `${titleElement.innerText.trim()}|${
+          dateElement?.innerText.trim() || ""
+        }|${linkElement.href}`;
         if (!items.has(key)) {
           items.set(key, {
             title: titleElement.innerText.trim(),
             date: dateElement?.innerText.trim() || null,
-            link: linkElement.href
+            link: linkElement.href,
           });
         }
       }
