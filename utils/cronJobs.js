@@ -2,7 +2,7 @@
 const cron = require("node-cron");
 const axios = require("axios");
 
-const SCRAPE_URL = process.env.SCRAPE_URL || "http://localhost:5000/api/scrape";
+const SCRAPE_URL = process.env.CRONJOB_URL || "http://localhost:5000/api/scrape";
 const startCronJobs = () => {
   console.log("✅ Cron job initialized!"); // <--- Add this
 
